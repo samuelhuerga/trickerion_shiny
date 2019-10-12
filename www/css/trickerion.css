@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'Brandon Grotesque'; 
+    src: url("brandon-grotesque-black.otf"); 
+}
+@font-face {
+    font-family: 'Brandon Grotesque Light'; 
+    src: url("brandon-grotesque-light.otf"); 
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: "Brandon Grotesque";
+}
+
+h5:after{
+    content:' ';
+    display:block;
+    border:1px #FFFFFF;
+    border-style:dotted none none none;
+}
+
+* {
+    font-family: "Brandon Grotesque";
+}
+
+.btn{
+  padding:0px;
+}
+
+.resources-market {
+  position: relative;
+  text-align: center;
+}
+
+#market_row {
+  position: relative;
+  text-align: center;
+  color: #EEA83C;
+}
+
+section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-input.action-link{
+  margin: 0px 2px;
+  display: inline-block;
+}
+.resources-own {
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+.btn-default{
+ font-size: 20px;
+  color: white;
+}
+
+.btn-default:hover {
+    color: white;
+}
+
+.btn-default:focus {
+    color: white;
+}
+
+.btn-default:active {
+    color: white;
+}
+
+
+
+.resources-needed {
+  position: relative;
+  text-align: center;
+  font-size: 10px;
+  color: white;
+}
+
+.resource {
+  position: relative;
+  text-align: center;
+  color: white;
+  width: max-content;
+  display: inline-block;
+  margin: 2px 8px;
+
+}
+.resource-table {
+  position: relative;
+  text-align: center;
+  color: white;
+  width: max-content;
+  display: inline-block;
+  margin: 2px;
+}
+
+.right {
+  text-align: right;
+}
+
+
+
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  
+}
+
+
+.skin-blue .main-header .logo {
+ font-family: "Brandon Grotesque";
+  background-color: #B6914E;
+  color: #881517;
+}
+
+
+
+/* logo when hovered */
+.skin-blue .main-header .logo:hover {
+  background-color: #B6914E;
+}
+
+/* navbar (rest of the header) */
+.skin-blue .main-header .navbar {
+  background-color: #B6914E;
+}        
+
+/* main sidebar */
+.skin-blue .main-sidebar {
+  background-color: #B6914E;
+}
+
+/* active selected tab in the sidebarmenu */
+.skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
+  background-color: #ff0000;
+}
+
+/* other links in the sidebarmenu */
+.skin-blue .main-sidebar .sidebar .sidebar-menu a{
+  background-color: #00ff00;
+  color: #000000;
+}
+
+/* other links in the sidebarmenu when hovered */
+ .skin-blue .main-sidebar .sidebar .sidebar-menu a:hover{
+  background-color: #B6914E;
+}
+
+/* toggle button when hovered  */                    
+ .skin-blue .main-header .navbar .sidebar-toggle:hover{
+  background-color: #B6914E;
+  color: #881517;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle{
+  background-color: #B6914E;
+  color: #881517;
+}
+
+.content-wrapper {
+  background-color: #F1E2CB;
+}
+
+.well{
+   background-color: #F4ECDA;
+}
+
+.box-body {
+   background-color: #F4ECDA;
+}
+
+.box-header {
+   background-color: #F4ECDA;
+   color: #F16C4B;
+  
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #F4ECDA;
+}
+                
+.table.dataTable tbody td.active, .table.dataTable tbody tr.active td {
+    background-color: #881517;
+    color: white;
+}
+
+.chart-wrapper { overflow-x: scroll; }
+
+
+.discrete{
+  font-family: "Brandon Grotesque Light";
+}
+}

@@ -1,0 +1,13 @@
+name: trickerion
+title: trickerion
+username:
+account: samuelhuerga
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1302244
+bundleId: 2485546
+url: https://samuelhuerga.shinyapps.io/trickerion/
+when: 1570659373.26011
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Magician_Workbook-Spread.pdf|Trickerion - Rules of Play.pdf
