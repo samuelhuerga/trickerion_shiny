@@ -34,11 +34,6 @@ function(input,output,session){
                                 label = HTML(glue("<img src='images/{.x}.png' width = '90px'>
                   <div class='bottom-right'>{.y}</div>"))),
               "</div>")) %>% 
-      # map2(resource, own_resources,
-      #      ~glue("<div class='resource'>
-      #         <img src='images/{.x}.png' width = '90px'>
-      #             <div class='bottom-right'>{.y}</div>
-      #         </div>")) %>% 
       reduce(paste,"\n") %>% 
       paste("<div class='resources-own'>",.,"</div>") %>% 
       HTML
@@ -108,10 +103,10 @@ function(input,output,session){
     req(input$components_in_market_row)
     
     tagList(
-    p("Click on a component to add it to the Market Row"),
+    p("Available components"),
     resources_df %>% 
       mutate(button = map(resource, ~actionButton(glue("resource_marketrow_{.x}"),
-                                                  label = HTML(glue("<img src='images/{.x}.png' width = '30px'>"))))) %>% 
+                                                  label = HTML(glue("<img src='images/{.x}.png' width = '45px'>"))))) %>% 
       group_by(y) %>% 
       summarise(buttons = tagList(button)) %>% 
       mutate(buttons = map(buttons,~ append(.x,tagList(br())))) %>% 
@@ -130,25 +125,58 @@ function(input,output,session){
        }
        )
   )
+  output$workshop <- renderUI({
+    
+      box(width = ifelse(input$components_in_market_row,7,12),title = "WORKSHOP",status = "primary",
+          column(width = 4,
+                 p("Available components"),
+                 resources_df %>% 
+                   mutate(button = map(resource, ~actionButton(glue("resource_{.x}"),
+                                                               label = HTML(glue("<img src='images/{.x}.png' width = '45px'>"))))) %>% 
+                   group_by(y) %>% 
+                   summarise(buttons = tagList(button)) %>% 
+                   mutate(buttons = map(buttons,~ append(.x,tagList(br())))) %>% 
+                   summarise(buttons = tagList(buttons)) %>% 
+                   pull %>% 
+                   paste("<div class='resources-market'>",.,"</div>") %>% 
+                   HTML
+                 
+          ),
+          flechas(input$width),
+          column(width = 6,
+                 p("Components you already own"),
+                 htmlOutput("own_resources_html")
+          )
+      )
+    
+  })
   
   output$market_row <- renderUI({
     req(input$components_in_market_row)
     
-    box("MARKET ROW",width = 12,
-    rv$marketrow_resources_df %>% 
-      bind_rows(marketrow_empty_df %>% 
-                  slice(1:4 %>% setdiff(rv$marketrow_resources_df %>% 
-                                          mutate(rn = row_number()) %>% 
-                                          pull))) %$% 
-      map(resource,
-           ~paste0("<div class='resource'>",
-                   actionButton(glue("resource_marketrow_remove_{.x}"),
-                                label = HTML(glue("<img src='images/{.x}.png' width = '45px'>"))),
-                   "</div>")) %>% 
-      reduce(paste,"\n") %>% 
-      paste("<div class='resources-own'>",.,"</div>") %>% 
-      HTML
-    )
+      box(title = "MARKET ROW",width = ifelse(input$components_in_market_row,5,12),status = "info",
+          column(width = 5,
+                 uiOutput("resources_market_row")
+          ),
+          flechas(input$width),
+          column(width = 5,
+                 p("Components available in the Market Row"),
+                 rv$marketrow_resources_df %>% 
+                   bind_rows(marketrow_empty_df %>% 
+                               slice(1:4 %>% setdiff(rv$marketrow_resources_df %>% 
+                                                       mutate(rn = row_number()) %>% 
+                                                       pull))) %$% 
+                   map(resource,
+                       ~paste0("<div class='resource'>",
+                               actionButton(glue("resource_marketrow_remove_{.x}"),
+                                            label = HTML(glue("<img src='images/{.x}.png' width = '90px'>"))),
+                               "</div>")) %>% 
+                   reduce(paste,"\n") %>% 
+                   paste("<div class='resources_market_row_actual'>",.,"</div>") %>% 
+                   HTML
+          )
+      )
+    
   })
   
   

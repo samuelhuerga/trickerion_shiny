@@ -3,29 +3,9 @@ dashboardPage(
   
   dashboardHeader(title = "TRICKERION"),
   dashboardSidebar(
-    h5("FILTER RECOMMENDATIONS"),
-    fluidRow(
-      column(4,
-             checkboxGroupInput("filter_trick_type","Type",
-                                choiceNames = c("<img src='images/trick_type_escape.png' height='30'>",
-                                  "<img src='images/trick_type_mechanical.png' height='30'>",
-                                  "<img src='images/trick_type_optic.png' height='30'>",
-                                  "<img src='images/trick_type_spiritual.png' height='30'>") %>% map(HTML),
-                                choiceValues= c("Escape","Mechanical","Optic","Spiritual"),
-                                selected =  c("Escape","Mechanical","Optic","Spiritual"))),
-      column(4,
-             checkboxGroupInput("filter_fame_req","Fame required",
-                                choiceNames = c("<img src='images/fame_req_1.png' height='30'>",
-                                  "<img src='images/fame_req_16.png' height='30'>",
-                                  "<img src='images/fame_req_36.png' height='30'>") %>% map(HTML),
-                                choiceValues= c("1","16","36"),
-                                selected = c("1","16","36")))),
-    br(),
-    h5("FILTER COMPONENTS"),
-    checkboxInput("components_in_market_row","Only consider components which can be bought currently in Market Row"),
-    uiOutput("resources_market_row"),
-    br(),
-    uiOutput("market_row"),
+
+
+
     br(),
     h5("SORTING PREFERENCE"),
     radioButtons("sort_yield",
@@ -53,33 +33,51 @@ dashboardPage(
   ,
   dashboardBody(
     tags$head(
-      tags$link(rel = "stylesheet", type = "text/css", href = "css/trickerion.css")
+      tags$link(rel = "stylesheet", type = "text/css", href = "css/trickerion.css"),
+      tags$script('
+                        var width = 0;
+                        $(document).on("shiny:connected", function(e) {
+                          width = window.innerWidth;
+                          Shiny.onInputChange("width", width);
+                        });
+                        $(window).resize(function(e) {
+                          width = window.innerWidth;
+                          Shiny.onInputChange("width", width);
+                        });
+                        ')
+      
     ),
-    sidebarLayout(
-      sidebarPanel(
-        p("Click on a component to add it to your workshop"),
-        resources_df %>% 
-          mutate(button = map(resource, ~actionButton(glue("resource_{.x}"),
-                                                      label = HTML(glue("<img src='images/{.x}.png' width = '60px'>"))))) %>% 
-          group_by(y) %>% 
-          summarise(buttons = tagList(button)) %>% 
-          mutate(buttons = map(buttons,~ append(.x,tagList(br())))) %>% 
-          summarise(buttons = tagList(buttons)) %>% 
-          pull %>% 
-          paste("<div class='resources-market'>",.,"</div>") %>% 
-          HTML
-            
+    fluidPage(
+      fluidRow(
+      uiOutput("workshop"),
+      uiOutput("market_row")
       ),
-      mainPanel(
-        box(width = 12,title = "WORKSHOP",
-            p("Here you can find elements you already own"),
-            htmlOutput("own_resources_html"),
-            p("Click on an component to discard it",style = "text-align: right;")
-        ),
         
+        br(),
+        h5("FILTER RECOMMENDATIONS"),
+        fluidRow(
+          column(4,
+                 checkboxGroupInput("filter_trick_type","Type",inline = T,
+                                    choiceNames = c("<img src='images/trick_type_escape.png' height='30'>",
+                                                    "<img src='images/trick_type_mechanical.png' height='30'>",
+                                                    "<img src='images/trick_type_optic.png' height='30'>",
+                                                    "<img src='images/trick_type_spiritual.png' height='30'>") %>% map(HTML),
+                                    choiceValues= c("Escape","Mechanical","Optic","Spiritual"),
+                                    selected =  c("Escape","Mechanical","Optic","Spiritual"))),
+          column(4,
+                 checkboxGroupInput("filter_fame_req","Fame required", inline = T,
+                                    choiceNames = c("<img src='images/fame_req_1.png' height='30'>",
+                                                    "<img src='images/fame_req_16.png' height='30'>",
+                                                    "<img src='images/fame_req_36.png' height='30'>") %>% map(HTML),
+                                    choiceValues= c("1","16","36"),
+                                    selected = c("1","16","36"))),
+          column(4,
+                 checkboxInput("components_in_market_row","Only consider components which can be bought currently in Market Row")
+          )
+        ),
         dataTableOutput("tricks_DT")
       )
     )
-             
-  )
+  # )
 )
+

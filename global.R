@@ -53,3 +53,25 @@ optimize_tricks <- function(own_resources_df, sorting_order){
 
 resources_empty_df <- data_frame(resource = paste0("empty",1:6),own_resources = 1)
 marketrow_empty_df <- data_frame(resource = paste0("marketrow",1:4))
+
+flechas <- function(input_width){
+  if(input_width > 767){
+  column(width = 2, 
+         tags$div(class = "div-flechas",
+                  p("Click on a component to add it",class = "add"),
+                  tags$img(src = "images/flechas_horizontales_2.png", id = "flechas-horizontales"),
+                  p("Click on a component to remove it",class = "remove")
+         )
+  )
+  } else{
+    column(width = 2, 
+           br(),
+           tags$div(class = "div-flechas-verticales",
+                           tags$span("Click on a component to remove it",class = "remove-vertical"),
+                           tags$img(src = "images/flechas_verticales.png",id = "flechas-verticales"),
+                           tags$span("Click on a component to add it",class = "add-vertical")
+           ),
+           br()
+    )
+  }
+  }

@@ -31,10 +31,19 @@ h5:after{
   text-align: center;
 }
 
+.resources_market_row_actual {
+  position: relative;
+  text-align: center;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 #market_row {
   position: relative;
   text-align: center;
-  color: #EEA83C;
+
 }
 
 section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-input.action-link{
@@ -80,7 +89,7 @@ section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-i
   color: white;
   width: max-content;
   display: inline-block;
-  margin: 2px 8px;
+  margin: 2px 2px;
 
 }
 .resource-table {
@@ -168,13 +177,24 @@ section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-i
 
 .box-body {
    background-color: #F4ECDA;
+   text-align: center;
 }
 
-.box-header {
+.box-primary .box-header {
    background-color: #F4ECDA;
    color: #F16C4B;
+   text-align: center;
   
 }
+
+.box-info .box-header {
+   background-color: #F4ECDA;
+   color: #EEA83C;
+   text-align: center;
+  
+}
+
+
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #F4ECDA;
@@ -191,4 +211,67 @@ section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-i
 .discrete{
   font-family: "Brandon Grotesque Light";
 }
+
+.box.box-primary {
+    border-top-color: #F16C4B;
+}
+
+.box.box-info {
+    border-top-color: #EEA83C;
+}
+
+#flechas-horizontales { 
+  width: 100%; 
+  height: 71px; 
+}
+
+.div-flechas{
+  vertical-align: middle;
+  align-items: center; 
+}
+
+
+.add {
+  font-family: "Brandon Grotesque Light";
+  font-size: 10px;
+  color: #c5e0b4;
+  text-align: left;
+  padding-right: 40%;
+
+  
+}
+.remove {
+  font-family: "Brandon Grotesque Light";
+  font-size: 10px;
+  color: #f8cbad;
+  text-align: right;
+  padding-left: 40%;
+
+}
+
+.div-flechas-verticales{
+  display: grid;
+  grid-template-columns: 1fr 70px 1fr;
+}
+.add-vertical {
+  font-family: "Brandon Grotesque Light";
+  font-size: 10px;
+  color: #c5e0b4;
+  text-align: left;
+  align-self: start;
+  padding-top = 4px
+  
+}
+.remove-vertical {
+  font-family: "Brandon Grotesque Light";
+  font-size: 10px;
+  color: #f8cbad;
+  text-align: right;
+  align-self: end;
+  padding-bottom = 4px
+
+}
+
+#flechas-verticales { 
+  align: center; 
 }
