@@ -1,11 +1,12 @@
-
 function(input,output,session){
+  
+  rv <- reactiveValues()
+  
   rv$own_resources_df <-  data_frame(resource = "",own_resources = 0L) %>% slice(-1)
   rv$marketrow_resources_df<-  data_frame(resource = "") %>% slice(-1)
  
   walk(resources_df$resource,
        ~observeEvent(input[[glue("resource_{.x}")]],{
-         print( rv$own_resources_df)
          if(.x %in% isolate(rv$own_resources_df %>% pull(resource))){
            rv$own_resources_df <<- isolate(rv$own_resources_df) %>% 
              mutate(own_resources = ifelse(resource == .x,pmin(own_resources + 1L,3L),own_resources))

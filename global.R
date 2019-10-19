@@ -14,7 +14,6 @@ library(magrittr)
 
 # source("override.R", local = TRUE) # override 'icon' and 'valueBox'
 
-rv <- reactiveValues()
 
 validColors <-  c("red","yellow","aqua","blue","light-blue","green","navy","teal","olive","lime","orange","fuchsia","purple","maroon","black")
 
