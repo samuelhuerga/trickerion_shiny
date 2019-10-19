@@ -32,21 +32,25 @@ tricks_goals_df <- tricks_df %>%
 
 
 optimize_tricks <- function(own_resources_df, sorting_order){
-  tricks_resources_df %>% 
-    gather(resource,number_resources,-starts_with("trick")) %>% 
-    left_join(own_resources_df) %>% 
-    arrange(trick_name) %>% 
-    mutate(own_resources = own_resources %>% coalesce(0L)) %>% 
-    left_join(resource_cost_df) %>% 
-    mutate(needed = pmax(number_resources - own_resources, 0)) %>% 
-    # filter(needed != 0) %>% 
-    group_by_at(vars(starts_with("trick"))) %>% 
-    mutate(cost = sum(needed *resource_cost)) %>% 
-    select(-number_resources, -own_resources) %>% 
-    nest(-starts_with("trick") ,-cost) %>% 
-    mutate(data =  map(data, ~.x %>% filter(needed != 0))) %>% 
-    left_join(tricks_goals_df) %>% 
-    arrange(cost, -!!sym(sorting_order))
+  suppressMessages({
+    suppressWarnings({
+      tricks_resources_df %>% 
+        gather(resource,number_resources,-starts_with("trick")) %>% 
+        left_join(own_resources_df) %>% 
+        arrange(trick_name) %>% 
+        mutate(own_resources = own_resources %>% coalesce(0L)) %>% 
+        left_join(resource_cost_df) %>% 
+        mutate(needed = pmax(number_resources - own_resources, 0)) %>% 
+        # filter(needed != 0) %>% 
+        group_by_at(vars(starts_with("trick"))) %>% 
+        mutate(cost = sum(needed *resource_cost)) %>% 
+        select(-number_resources, -own_resources) %>% 
+        nest(-starts_with("trick") ,-cost) %>% 
+        mutate(data =  map(data, ~.x %>% filter(needed != 0))) %>% 
+        left_join(tricks_goals_df) %>% 
+        arrange(cost, -!!sym(sorting_order))
+    })
+  })
   
 }
 

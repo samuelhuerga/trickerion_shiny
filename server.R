@@ -56,7 +56,7 @@ function(input,output,session){
       optimize_tricks(input$sort_yield) %>% 
       ungroup %>% 
       filter(trick_type %in% input$filter_trick_type, fame_req %in% input$filter_fame_req) %>% 
-      filter(!input$components_in_market_row | map_lgl(data, ~nrow(.x %>% anti_join(rv$marketrow_resources_df)) == 0)) %>% 
+      filter(!input$components_in_market_row | map_lgl(data, ~nrow(suppressMessages({.x %>% anti_join(rv$marketrow_resources_df)})) == 0)) %>% 
       mutate(data = map_chr(data, function(data){if(nrow(data) == 0){""} else{data %$% 
           map2(resource, needed,
                ~glue("<div class='resource-table'>
