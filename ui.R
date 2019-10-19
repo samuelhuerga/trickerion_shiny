@@ -18,7 +18,7 @@ dashboardPage(
     
     h5("TABLE LEGEND"),
     p(HTML("<img src='images/fame_req.png' alt='Fame required' height='25'> Fame threshold"), class = "discrete"),
-    p(HTML("<img src='images/resources_needed.png' alt='Action cost' height='25'> Components required to be bought to prepare the trick"), class = "discrete"),
+    p(HTML("<img src='images/resources_needed.png' alt='Action cost' height='25'> Components need to be bought to prepare the trick"), class = "discrete"),
     p(HTML("<img src='images/coin_spend.png' alt='Coins needed' height='25'> Coins needed to buy these components"), class = "discrete"),
     br(),
     p(HTML("<img src='images/fame.png' alt='Fame' height='25'> Yield fame received when trick is performed"), class = "discrete"),
@@ -27,8 +27,11 @@ dashboardPage(
     br(),
     p(HTML("<img src='images/uses.png' alt='Uses' width='25'> Number of markers this trick can hold when prepared"), class = "discrete"),
     p(HTML("<img src='images/actions_spend.png' alt='Action cost' height='25'> Number of Workshop actions this tricks needs to be prepared"), class = "discrete"),
-    HTML('Samuel Huerga <a itemprop="sameAs" href="https://orcid.org/0000-0001-6149-4639" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a></br>'),
+    br(),
+    h5("CREDITS"),
+    HTML('<a href="http://www.samuelhuerga.com">Samuel Huerga </a> <a itemprop="sameAs" href="https://orcid.org/0000-0001-6149-4639" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a></br>'),
     HTML('<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />'),
+    
     collapsed = T)
   ,
   dashboardBody(

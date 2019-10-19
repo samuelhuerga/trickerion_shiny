@@ -31,7 +31,7 @@ function(input,output,session){
       map2(resource, own_resources,
            ~paste0("<div class='resource'>",
                    actionButton(glue("resource_own_remove_{.x}"),
-                                label = HTML(glue("<img src='images/{.x}.png' width = '90px'>
+                                label = HTML(glue("<img src='images/resources_90/{.x}.png' width = '90px'>
                   <div class='bottom-right'>{.y}</div>"))),
               "</div>")) %>% 
       reduce(paste,"\n") %>% 
@@ -59,7 +59,7 @@ function(input,output,session){
       mutate(data = map_chr(data, function(data){if(nrow(data) == 0){""} else{data %$% 
           map2(resource, needed,
                ~glue("<div class='resource-table'>
-              <img src='images/{.x}.png' width = '30px'>
+              <img src='images/resources_30/{.x}.png' width = '30px'>
                   <div class='bottom-right'>{.y}</div>
               </div>")) %>% 
           reduce(paste,"\n") %>% 
@@ -106,7 +106,7 @@ function(input,output,session){
     p("Available components"),
     resources_df %>% 
       mutate(button = map(resource, ~actionButton(glue("resource_marketrow_{.x}"),
-                                                  label = HTML(glue("<img src='images/{.x}.png' width = '45px'>"))))) %>% 
+                                                  label = HTML(glue("<img src='images/resources_45/{.x}.png' width = '45px'>"))))) %>% 
       group_by(y) %>% 
       summarise(buttons = tagList(button)) %>% 
       mutate(buttons = map(buttons,~ append(.x,tagList(br())))) %>% 
@@ -132,7 +132,7 @@ function(input,output,session){
                  p("Available components"),
                  resources_df %>% 
                    mutate(button = map(resource, ~actionButton(glue("resource_{.x}"),
-                                                               label = HTML(glue("<img src='images/{.x}.png' width = '45px'>"))))) %>% 
+                                                               label = HTML(glue("<img src='images/resources_45/{.x}.png' width = '45px'>"))))) %>% 
                    group_by(y) %>% 
                    summarise(buttons = tagList(button)) %>% 
                    mutate(buttons = map(buttons,~ append(.x,tagList(br())))) %>% 
@@ -170,7 +170,7 @@ function(input,output,session){
                    map(resource,
                        ~paste0("<div class='resource'>",
                                actionButton(glue("resource_marketrow_remove_{.x}"),
-                                            label = HTML(glue("<img src='images/{.x}.png' width = '90px'>"))),
+                                            label = HTML(glue("<img src='images/resources_90/{.x}.png' width = '90px'>"))),
                                "</div>")) %>% 
                    reduce(paste,"\n") %>% 
                    paste("<div class='resources_market_row_actual'>",.,"</div>") %>% 
