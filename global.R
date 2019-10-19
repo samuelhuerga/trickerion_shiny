@@ -55,11 +55,18 @@ resources_empty_df <- data_frame(resource = paste0("empty",1:6),own_resources = 
 marketrow_empty_df <- data_frame(resource = paste0("marketrow",1:4))
 
 flechas <- function(input_width){
+  if(is.null(input_width)){
+    input_width <- 1000
+  }
   if(input_width > 767){
   column(width = 2, 
          tags$div(class = "div-flechas",
                   p("Click on a component to add it",class = "add"),
-                  tags$img(src = "images/flechas_horizontales_2.png", id = "flechas-horizontales"),
+                  tags$div(class = "div-flechas-horizontales",
+                           tags$img(src = "images/flecha_horizontal_izquierda.png"),
+                           tags$img(src = "images/flecha_horizontal_fill.png", width= "100%", height = "71px"),
+                           tags$img(src = "images/flecha_horizontal_derecha.png")),
+                  # tags$img(src = "images/flechas_horizontales_2.png", id = "flechas-horizontales"),
                   p("Click on a component to remove it",class = "remove")
          )
   )

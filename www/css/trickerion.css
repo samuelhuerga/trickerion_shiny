@@ -249,6 +249,10 @@ section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-i
 
 }
 
+.div-flechas-horizontales{
+  display: grid;
+  grid-template-columns: 17px 1fr 17px;
+}
 .div-flechas-verticales{
   display: grid;
   grid-template-columns: 1fr 70px 1fr;

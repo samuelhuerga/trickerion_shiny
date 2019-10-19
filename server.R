@@ -153,6 +153,7 @@ function(input,output,session){
   
   output$market_row <- renderUI({
     req(input$components_in_market_row)
+    req(input$width)
     
       box(title = "MARKET ROW",width = ifelse(input$components_in_market_row,5,12),status = "info",
           column(width = 5,
