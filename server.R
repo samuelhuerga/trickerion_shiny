@@ -190,4 +190,8 @@ function(input,output,session){
        )
   )
     
+  output$keepAlive <- renderText({
+    req(input$count)
+    paste("")
+  })
 }
