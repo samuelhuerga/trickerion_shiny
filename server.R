@@ -2,9 +2,29 @@ function(input,output,session){
   
   rv <- reactiveValues()
   
-  rv$own_resources_df <-  data_frame(resource = "",own_resources = 0L) %>% slice(-1)
+  rv$own_resources_df <- data_frame(resource = "",own_resources = 0L) %>% slice(-1)
   rv$marketrow_resources_df<-  data_frame(resource = "") %>% slice(-1)
+
+  observeEvent(input$cookies$own_resources_df,{
+    cookie_own_resources_df <- input$cookies$own_resources_df %>%  fromJSON() %>% as_tibble()
+    
+    if(!identical(cookie_own_resources_df, isolate(rv$own_resources_df)))
+      rv$own_resources_df <- cookie_own_resources_df
+  }
+  )
+  
  
+  # observe to save the cookies
+  observeEvent(rv$own_resources_df, {
+    msg <- list(
+      name = "own_resources_df", value = rv$own_resources_df
+    )
+    
+    if(nrow(rv$own_resources_df) != 0){
+      session$sendCustomMessage("cookie-set", msg)
+      }
+  })
+  
   walk(resources_df$resource,
        ~observeEvent(input[[glue("resource_{.x}")]],{
          if(.x %in% isolate(rv$own_resources_df %>% pull(resource))){
@@ -190,8 +210,4 @@ function(input,output,session){
        )
   )
     
-  output$keepAlive <- renderText({
-    req(input$count)
-    paste("")
-  })
 }
