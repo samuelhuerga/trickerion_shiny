@@ -11,9 +11,10 @@ library(glue)
 library(janitor)
 library(readxl)
 library(magrittr)
+library(jsonlite)
 
 # source("override.R", local = TRUE) # override 'icon' and 'valueBox'
-
+addResourcePath("www", "www")
 
 validColors <-  c("red","yellow","aqua","blue","light-blue","green","navy","teal","olive","lime","orange","fuchsia","purple","maroon","black")
 

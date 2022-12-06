@@ -3,9 +3,6 @@ dashboardPage(
   
   dashboardHeader(title = "TRICKERION"),
   dashboardSidebar(
-
-
-
     br(),
     h5("SORTING PREFERENCE"),
     radioButtons("sort_yield",
@@ -36,22 +33,8 @@ dashboardPage(
   ,
   dashboardBody(
     tags$head(
-      HTML(
-        "
-          <script>
-          var socket_timeout_interval
-          var n = 0
-          $(document).on('shiny:connected', function(event) {
-          socket_timeout_interval = setInterval(function(){
-          Shiny.onInputChange('count', n++)
-          }, 15000)
-          });
-          $(document).on('shiny:disconnected', function(event) {
-          clearInterval(socket_timeout_interval)
-          });
-          </script>
-          "
-      ),
+      tags$script(src = "www/js_scripts/js.cookie.js"),
+      tags$script(src = "www/js_scripts/script.js"),
       tags$link(rel = "stylesheet", type = "text/css", href = "css/trickerion.css"),
       tags$script('
                         var width = 0;
@@ -94,8 +77,7 @@ dashboardPage(
                  checkboxInput("components_in_market_row","Only consider components which can be bought currently in Market Row")
           )
         ),
-        dataTableOutput("tricks_DT"),
-        textOutput("keepAlive")
+        dataTableOutput("tricks_DT")
       )
     )
   # )
